@@ -1,0 +1,1 @@
+Ejecutar "npm run build" sobre la carptea "template" y copiar el contenido de "template\dist" en "portable\build"

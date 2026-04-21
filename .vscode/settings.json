@@ -1,0 +1,18 @@
+{
+  "java.jdt.ls.java.home": "C:\\Users\\Brayan Denis\\.jdks\\corretto-17.0.15",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\Users\\Brayan Denis\\.jdks\\corretto-17.0.15",
+      "default": true
+    }
+  ],
+  "maven.terminal.useJavaHome": true,
+  "cSpell.words": [
+    "springframework",
+    "socialcommerce",
+    "springdoc",
+    "flywaydb",
+
+  ]
+}

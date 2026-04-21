@@ -1,0 +1,449 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+:root {
+  /* Colors — White / Blue / Celeste */
+  --color-bg-base:           rgba(255,255,255,0.96);
+  --color-bg-elevated:       rgba(244,249,255,0.95);
+  --color-bg-surface:        rgba(236,245,255,0.95);
+  --color-bg-surface-hover:  rgba(226,238,255,0.98);
+  --color-bg-overlay:        rgba(255,255,255,0.92);
+  --color-brand-primary:     #1D4ED8;
+  --color-brand-secondary:   #2563EB;
+  --color-accent-celeste:    #38BDF8;
+  --color-accent-celeste-light: #BAE6FD;
+  --color-accent-wa:         #25D366;
+  --color-accent-wa-hover:   #1DA851;
+  --color-accent-glow:       rgba(37,99,235,0.2);
+  --color-text-primary:      #0F172A;
+  --color-text-body:         #334155;
+  --color-text-muted:        #64748B;
+  --color-text-inverse:      #FFFFFF;
+  --color-border-subtle:     rgba(37,99,235,0.1);
+  --color-border-active:     rgba(37,99,235,0.4);
+  --color-success:           #10B981;
+  --color-error:             #EF4444;
+  --color-bg-light:          #F8FAFC;
+
+  /* Hero section (dark overlay for hero only) */
+  --color-hero-bg:           #0B1E2D;
+  --color-hero-text:         #F0F4F8;
+  --color-hero-body:         #CBD5E1;
+
+  /* Spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Radii */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-pill: 50px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:         0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:         0 4px 16px rgba(0,0,0,0.1);
+  --shadow-lg:         0 8px 32px rgba(0,0,0,0.12);
+  --shadow-glow-blue:  0 0 40px rgba(37,99,235,0.2);
+  --shadow-glow-green: 0 0 30px rgba(37,211,102,0.3);
+  --shadow-glow-celeste: 0 0 30px rgba(56,189,248,0.25);
+  --shadow-navbar:     0 2px 20px rgba(0,0,0,0.08);
+
+  /* Easings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f4f9ff;
+  background-image: linear-gradient(180deg, #eff6ff 0%, #f8fbff 45%, #eff7ff 100%);
+  color: var(--color-text-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Hero Dark Section ──────────────────────────────────────── */
+.hero-dark {
+  background: linear-gradient(135deg, #0B1E2D 0%, #0F2A45 50%, #162F4A 100%);
+  color: var(--color-hero-text);
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+/* ─── Focus States (Accessibility) ─────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-brand-secondary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+  50%       { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes strokeDraw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes morphGlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Container ─────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 4rem);
+}
+
+/* ─── Section Padding ────────────────────────────────────────── */
+.section-padding {
+  padding: clamp(4rem, 10vw, 7rem) 0;
+}
+
+/* ─── Glass Effect ───────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(37,99,235,0.1);
+}
+
+/* ─── Glass Effect (dark sections like hero) ────────────────── */
+.glass-dark {
+  background: rgba(15, 42, 69, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(168, 184, 200, 0.1);
+}
+
+/* ─── Steel Surface ──────────────────────────────────────────── */
+.steel-surface {
+  background: linear-gradient(135deg,
+    rgba(37,99,235,0.04) 0%,
+    rgba(56,189,248,0.04) 50%,
+    rgba(37,99,235,0.02) 100%
+  );
+  border: 1px solid rgba(37,99,235,0.1);
+}
+
+/* ─── Gradient Text ──────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 40%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-hero {
+  background: linear-gradient(90deg, #F0F4F8 0%, #BAE6FD 60%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-green {
+  background: linear-gradient(90deg, #25D366, #10B981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── WhatsApp Button ────────────────────────────────────────── */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #25D366 0%, #1DA851 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-glow-green);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 40px rgba(37,211,102,0.5);
+}
+
+.btn-whatsapp:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ─── Primary Button ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(37,99,235,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+/* ─── Ghost Button ───────────────────────────────────────────── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 27px;
+  background: transparent;
+  color: var(--color-hero-text);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(56,189,248,0.6);
+  background: rgba(56,189,248,0.1);
+}
+
+/* ─── Ghost Button Light (for non-hero sections) ────────────── */
+.btn-ghost-light {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 27px;
+  background: transparent;
+  color: var(--color-brand-secondary);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(37,99,235,0.25);
+  transition: border-color 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-ghost-light:hover {
+  border-color: rgba(37,99,235,0.5);
+  background: rgba(37,99,235,0.06);
+}
+
+/* ─── Section Label ──────────────────────────────────────────── */
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-brand-secondary);
+  margin-bottom: 1rem;
+}
+
+/* ─── Section Headline ───────────────────────────────────────── */
+.section-headline {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Service / Differentiator Card ─────────────────────────── */
+.card {
+  background: #FFFFFF;
+  border: 1px solid rgba(37,99,235,0.08);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.card:hover {
+  border-color: rgba(37,99,235,0.25);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.12);
+}
+
+/* ─── Hero gradient bg fallback ─────────────────────────────── */
+.hero-bg-fallback {
+  background: 
+    radial-gradient(ellipse at 75% 50%, rgba(56,189,248,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 25% 80%, rgba(37,99,235,0.08) 0%, transparent 50%),
+    linear-gradient(135deg, #0B1E2D 0%, #0F2A45 50%, #162F4A 100%);
+  background-size: 200% 200%;
+  animation: morphGlow 8s ease-in-out infinite alternate;
+}
+
+/* ─── Cert Badge ─────────────────────────────────────────────── */
+.cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(37,99,235,0.06);
+  border: 1px solid rgba(37,99,235,0.15);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-brand-secondary);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cert-badge:hover {
+  background: rgba(37,99,235,0.1);
+  border-color: rgba(37,99,235,0.3);
+}
+
+/* ─── Metrics dark strip ─────────────────────────────────────── */
+.metrics-line {
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #2563EB, transparent);
+  border-radius: 2px;
+  margin: 0.75rem auto 0;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb { background: var(--color-accent-celeste); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-secondary); }
+
+/* ─── Section Divider Wave ───────────────────────────────────── */
+.section-divider-wave {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ─── Business-themed Animations ─────────────────────────────── */
+
+/* Shield float for Certificaciones section */
+@keyframes shieldFloat {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-12px) rotate(6deg); }
+}
+
+/* Milk drop pulse for decorative elements */
+@keyframes milkDrop {
+  0%, 100% { transform: scale(1); opacity: 0.08; }
+  50%      { transform: scale(1.15); opacity: 0.14; }
+}
+
+/* Temperature line scan for Métricas */
+@keyframes tempScan {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Route pulse for Contacto coverage lines */
+@keyframes routePulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.8; }
+}
+
+/* Cisterna steel shimmer for cards */
+@keyframes steelShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

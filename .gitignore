@@ -1,0 +1,8 @@
+node_modules/
+bdymariafe-web/node_modules/
+template/node_modules/
+bdymariafe-web/dist/
+*.local
+.env
+.DS_Store
+Thumbs.db
