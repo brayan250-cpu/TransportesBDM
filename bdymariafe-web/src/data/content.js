@@ -198,47 +198,6 @@ export const GALERIA = {
   note:    'Las imágenes finales serán proporcionadas por el cliente. Esta galería se actualizará con fotos reales de la flota y el equipo.',
 }
 
-export const TESTIMONIOS = {
-  label:    'Testimonios',
-  headline: 'Lo que dicen quienes confían en nosotros',
-  intro:    'Productores y cooperativas que eligieron el estándar más alto en transporte de leche fresca.',
-}
-
-export const TESTIMONIAL_LIST = [
-  {
-    id: 1,
-    name: 'Carlos Quispe',
-    role: 'Productor ganadero — Cajamarca',
-    quote: 'Antes perdía lotes enteros por problemas de temperatura. Con BD & Mariafe la leche llega perfecta a la planta de Gloria. Nunca más un rechazo.',
-    rating: 5,
-    initial: 'C',
-  },
-  {
-    id: 2,
-    name: 'María Elena Huanca',
-    role: 'Jefa de Acopio — Cooperativa Láctea Norte',
-    quote: 'La documentación que entregan es impecable. Cuando DIGESA nos auditó no tuvieron ninguna observación. Recomiendo BD & Mariafe al 100%.',
-    rating: 5,
-    initial: 'M',
-  },
-  {
-    id: 3,
-    name: 'Jorge Ramos',
-    role: 'Productor independiente — Trujillo',
-    quote: 'Siempre llegan en el horario acordado. He trabajado con otros transportistas y la diferencia es enorme. Esto es profesionalismo de verdad.',
-    rating: 5,
-    initial: 'J',
-  },
-  {
-    id: 4,
-    name: 'Rosa Mendoza',
-    role: 'Administradora — Centro de Acopio La Esperanza',
-    quote: 'El sistema de trazabilidad nos facilita el trabajo con las plantas. Tenemos el historial completo de cada lote al instante. Es un servicio diferente.',
-    rating: 5,
-    initial: 'R',
-  },
-]
-
 export const CONTACTO = {
   label:            'Contáctanos',
   headline:         '¿Listo para transportar con los más altos estándares sanitarios?',

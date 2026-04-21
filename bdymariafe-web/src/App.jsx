@@ -10,7 +10,6 @@ import { GaleriaSection } from './components/organisms/GaleriaSection'
 import { ContactoSection } from './components/organisms/ContactoSection'
 import { Footer } from './components/organisms/Footer'
 import { WhatsAppFloat } from './components/organisms/WhatsAppFloat'
-import { TestimoniosSection } from './components/organisms/TestimoniosSection'
 import { useTier } from './context/DeviceTierContext'
 
 const GlobalDNA = lazy(() => import('./components/three/scenes/DNAHelixScene').then(m => ({ default: m.GlobalDNABackground })))
@@ -33,7 +32,6 @@ function App() {
         <PropuestaSection />
         <ServiciosSection />
         <MetricasSection />
-        <TestimoniosSection />
         <ProcesoSection />
         <CertificacionesSection />
         <GaleriaSection />
