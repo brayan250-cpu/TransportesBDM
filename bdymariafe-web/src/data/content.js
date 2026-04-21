@@ -150,9 +150,9 @@ export const PROCESO = {
 
 export const PROCESS_STEPS = [
   { number: '01', title: 'Nos coordinas por WhatsApp', description: 'Escríbenos con tu zona, volumen estimado y frecuencia. Confirmamos disponibilidad y acordamos la ruta en minutos.' },
-  { number: '02', title: 'Verificamos los parámetros', description: 'Antes de cargar, nuestro operador verifica los parámetros de la leche enfriada (temperatura, acidez inicial). Sin leche fuera de norma, sin problemas en planta.' },
-  { number: '03', title: 'Cargamos y sellamos', description: 'La cisterna se llena y se sella con precintos de seguridad numerados. Iniciamos el registro de trazabilidad del lote.' },
-  { number: '04', title: 'Transportamos con monitoreo', description: 'La leche viaja a ≤ 6°C, monitoreo continuo durante todo el trayecto. Si hay alguna incidencia, te notificamos de inmediato.' },
+  { number: '02', title: 'Verificamos los parámetros', description: 'Antes de cargar, nuestro operador verifica la temperatura de la leche enfriada (debe estar a 3°C), acidez inicial y condiciones del lote. Sin leche fuera de norma, sin problemas en planta.' },
+  { number: '03', title: 'Cargamos y sellamos', description: 'La cisterna se llena con leche a 3°C y se sella con precintos de seguridad numerados. Iniciamos el registro de trazabilidad del lote.' },
+  { number: '04', title: 'Transportamos con monitoreo', description: 'La leche parte a 3°C y puede subir hasta 2°C en 24 horas de trayecto — siempre dentro de norma. Monitoreo continuo durante todo el viaje; cualquier incidencia te la notificamos de inmediato.' },
   { number: '05', title: 'Entregamos en planta', description: 'Llegamos dentro de la ventana horaria de recepción. Entregamos la leche junto a toda la documentación sanitaria del lote.' },
   { number: '06', title: 'Te enviamos el registro', description: 'Post-entrega recibes el registro completo del viaje: tiempo, temperatura, conductor y datos del lote para tus archivos.' },
 ]

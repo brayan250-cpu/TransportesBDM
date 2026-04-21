@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver'
 import { GALERIA } from '../../data/content'
 import { WavyDivider } from '../atoms/WavyDivider'
@@ -149,7 +149,11 @@ export function GaleriaSection() {
   const [current, setCurrent] = useState(0)
   const [perPage, setPerPage] = useState(3)
   const [paused, setPaused] = useState(false)
-  const dragStartX = useRef(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const touchStartX = useRef(null)
+  const touchStartY = useRef(null)
+  const touchStartTime = useRef(null)
+  const trackRef = useRef(null)
 
   const pages = Math.ceil(TOTAL / perPage)
 
@@ -157,6 +161,7 @@ export function GaleriaSection() {
     const update = () => {
       const w = window.innerWidth
       setPerPage(w < 600 ? 1 : w < 900 ? 2 : 3)
+      setIsMobile(w < 768)
     }
     update()
     window.addEventListener('resize', update)
@@ -170,30 +175,52 @@ export function GaleriaSection() {
   const next = useCallback(() => setCurrent(c => (c + 1) % Math.ceil(TOTAL / perPage)), [perPage])
   const prev = useCallback(() => setCurrent(c => (c - 1 + Math.ceil(TOTAL / perPage)) % Math.ceil(TOTAL / perPage)), [perPage])
 
+  // Autoplay
   useEffect(() => {
     if (paused) return
-    const id = setInterval(next, 4200)
+    const id = setInterval(next, 4000)
     return () => clearInterval(id)
   }, [paused, next])
 
-  const onPointerDown = (e) => { dragStartX.current = e.clientX }
-  const onPointerUp = (e) => {
-    if (dragStartX.current === null) return
-    const diff = dragStartX.current - e.clientX
-    if (Math.abs(diff) > 48) diff > 0 ? next() : prev()
-    dragStartX.current = null
-  }
-  const onTouchStart = (e) => { dragStartX.current = e.touches[0].clientX }
-  const onTouchEnd = (e) => {
-    if (dragStartX.current === null) return
-    const diff = dragStartX.current - e.changedTouches[0].clientX
-    if (Math.abs(diff) > 48) diff > 0 ? next() : prev()
-    dragStartX.current = null
-    setTimeout(() => setPaused(false), 200)
+  // Mouse drag
+  const mouseStart = useRef(null)
+  const onMouseDown = (e) => { mouseStart.current = e.clientX }
+  const onMouseUp = (e) => {
+    if (mouseStart.current === null) return
+    const diff = mouseStart.current - e.clientX
+    if (Math.abs(diff) > 40) diff > 0 ? next() : prev()
+    mouseStart.current = null
   }
 
-  // Each item = containerWidth/perPage. Track = containerWidth * TOTAL/perPage.
-  // Page translate = -(current * containerWidth) as % of track = -(current * perPage/TOTAL * 100)%
+  // Touch — velocity-aware swipe
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+    touchStartTime.current = Date.now()
+    setPaused(true)
+  }
+  const onTouchMove = (e) => {
+    if (touchStartX.current === null || touchStartY.current === null) return
+    const dx = Math.abs(e.touches[0].clientX - touchStartX.current)
+    const dy = Math.abs(e.touches[0].clientY - touchStartY.current)
+    // Only prevent scroll if horizontal swipe is dominant
+    if (dx > dy && dx > 8) e.preventDefault()
+  }
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const dx = touchStartX.current - e.changedTouches[0].clientX
+    const dt = Date.now() - touchStartTime.current
+    const velocity = Math.abs(dx) / dt  // px/ms
+    // Trigger on short fast swipe OR long slow drag
+    if (velocity > 0.3 || Math.abs(dx) > 50) {
+      dx > 0 ? next() : prev()
+    }
+    touchStartX.current = null
+    touchStartY.current = null
+    touchStartTime.current = null
+    setTimeout(() => setPaused(false), 600)
+  }
+
   const translateX = -(current * perPage / TOTAL) * 100
 
   return (
@@ -217,27 +244,44 @@ export function GaleriaSection() {
           <span className="section-label">{GALERIA.label}</span>
           <h2 id="galeria-heading" className="section-headline">{GALERIA.headline}</h2>
           <p style={{ color: '#334155', fontSize: '1.05rem', lineHeight: 1.75 }}>{GALERIA.intro}</p>
+          {isMobile && (
+            <p style={{ color: '#94A3B8', fontSize: '0.8rem', marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+              <span>←</span> Desliza para ver más <span>→</span>
+            </p>
+          )}
         </div>
 
         {/* Carousel */}
-        <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-          {/* Clip wrapper */}
+        <div
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          {/* Clip + touch wrapper */}
           <div
-            style={{ overflow: 'hidden', borderRadius: 16, cursor: 'grab' }}
-            onMouseDown={onPointerDown}
-            onMouseUp={onPointerUp}
-            onTouchStart={(e) => { setPaused(true); onTouchStart(e) }}
+            ref={trackRef}
+            style={{
+              overflow: 'hidden',
+              borderRadius: 16,
+              cursor: isMobile ? 'grab' : 'default',
+              touchAction: 'pan-y',
+              WebkitUserSelect: 'none',
+              userSelect: 'none',
+            }}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-            {/* Animated track */}
             <motion.div
               animate={{ x: `${translateX}%` }}
-              transition={{ type: 'spring', stiffness: 280, damping: 32 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 34, mass: 0.9 }}
               style={{
                 display: 'flex',
                 width: `${(TOTAL / perPage) * 100}%`,
                 userSelect: 'none',
               }}
+              drag={false}
             >
               {PLACEHOLDER_ITEMS.map((item, index) => (
                 <div
@@ -248,14 +292,25 @@ export function GaleriaSection() {
                     boxSizing: 'border-box',
                   }}
                 >
-                  <GalleryCard item={item} index={index} />
+                  <GalleryItem item={item} index={index} />
                 </div>
               ))}
             </motion.div>
           </div>
 
+          {/* Progress bar */}
+          <div style={{ height: 3, background: 'rgba(37,99,235,0.1)', borderRadius: 2, marginTop: 20, overflow: 'hidden' }}>
+            <motion.div
+              key={`prog-${current}-${paused}`}
+              initial={{ width: '0%' }}
+              animate={{ width: '100%' }}
+              transition={{ duration: paused ? 0 : 4, ease: 'linear' }}
+              style={{ height: '100%', background: 'linear-gradient(90deg, #2563EB, #60A5FA)', borderRadius: 2 }}
+            />
+          </div>
+
           {/* Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginTop: 28 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, marginTop: 20 }}>
             <ArrowBtn dir="prev" onClick={prev} />
             <div style={{ display: 'flex', gap: 8 }} role="tablist" aria-label="Páginas de la galería">
               {Array.from({ length: pages }, (_, i) => (
@@ -264,7 +319,7 @@ export function GaleriaSection() {
                   role="tab"
                   aria-selected={i === current}
                   aria-label={`Página ${i + 1}`}
-                  onClick={() => setCurrent(i)}
+                  onClick={() => { setCurrent(i); setPaused(true); setTimeout(() => setPaused(false), 4000) }}
                   style={{
                     width: i === current ? 28 : 8, height: 8, borderRadius: 4,
                     background: i === current ? '#2563EB' : 'rgba(37,99,235,0.18)',

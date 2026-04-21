@@ -210,7 +210,6 @@ export function ContactoSection() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
               {[
                 { icon: <PhoneIcon />, label: 'WhatsApp', value: CONTACT.phone, href: `tel:${CONTACT.phone}` },
-                { icon: <MailIcon />,  label: 'Email',    value: CONTACT.email, href: `mailto:${CONTACT.email}` },
                 { icon: <MapIcon />,   label: 'Ubicación', value: CONTACT.address, href: null },
               ].map(item => (
                 <div key={item.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
