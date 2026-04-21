@@ -35,7 +35,7 @@ export function Footer() {
               boxShadow: '0 12px 30px rgba(0,0,0,0.18)',
             }}>
               <img
-                src="/logo-bdm.png"
+                src={`${import.meta.env.BASE_URL}logo-bdm.png`}
                 alt="Transportes BDM"
                 style={{
                   height: 'clamp(52px, 8vw, 76px)',
@@ -122,13 +122,6 @@ export function Footer() {
                 <a href={waUrl} target="_blank" rel="noopener noreferrer"
                   style={{ color: '#25D366', fontSize: '0.9rem', fontWeight: 600, textDecoration: 'none' }}>
                   {CONTACT.phone}
-                </a>
-              </div>
-              <div>
-                <p style={{ color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Email</p>
-                <a href={`mailto:${CONTACT.email}`}
-                  style={{ color: '#A8B8C8', fontSize: '0.9rem', textDecoration: 'none' }}>
-                  {CONTACT.email}
                 </a>
               </div>
               <div>
