@@ -447,3 +447,135 @@ button {
   0%   { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+/* Scroll bounce for hero indicator */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  40%      { transform: translateX(-50%) translateY(8px); }
+  60%      { transform: translateX(-50%) translateY(4px); }
+}
+
+/* ─── Enhanced Scroll-Reveal Animations ──────────────────────── */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes revealScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Glow line animation for section accents */
+@keyframes glowLine {
+  0%   { width: 0; opacity: 0; }
+  50%  { opacity: 1; }
+  100% { width: 80px; opacity: 1; }
+}
+
+/* ─── Mobile Touch-Friendly Card Interactions ────────────────── */
+.card:active {
+  transform: translateY(-2px) scale(0.99);
+  box-shadow: 0 6px 24px rgba(37,99,235,0.15);
+  border-color: rgba(37,99,235,0.3);
+}
+
+/* ─── Mobile-Specific Fixes ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .btn-whatsapp {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-ghost,
+  .btn-ghost-light {
+    padding: 11px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-headline {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+  }
+
+  .cert-badge {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Fix WhatsApp float for mobile browsers with bottom bars */
+  .whatsapp-float-mobile-safe {
+    bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
+    right: 16px !important;
+  }
+
+  /* Prevent body scroll when mobile nav is open */
+  body.nav-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ─── Card Shimmer Hover Effect ──────────────────────────────── */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(37, 99, 235, 0.04),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  left: 100%;
+}
+
+/* ─── Smooth Section Transitions ─────────────────────────────── */
+section {
+  will-change: auto;
+}
+
+/* ─── GPU-accelerated animation hints ────────────────────────── */
+.hero-bg-fallback,
+.btn-whatsapp,
+.card {
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}

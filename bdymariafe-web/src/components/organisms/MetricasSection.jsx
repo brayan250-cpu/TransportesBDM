@@ -126,7 +126,7 @@ export function MetricasSection() {
         {/* Stats grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
           gap: 0,
           borderRadius: 24,
           overflow: 'hidden',
@@ -138,7 +138,8 @@ export function MetricasSection() {
         }}>
           {METRICS.map((metric, i) => (
             <div key={metric.id} style={{
-              borderRight: i < METRICS.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+              borderRight: '1px solid rgba(255,255,255,0.08)',
+              borderBottom: '1px solid rgba(255,255,255,0.08)',
             }}>
               <StatBlock metric={metric} index={i} />
             </div>

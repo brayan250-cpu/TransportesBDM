@@ -118,8 +118,8 @@ export function ProcesoSection() {
         {/* Two columns layout */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '0 80px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+          gap: '0 clamp(32px, 6vw, 80px)',
           maxWidth: 900,
           margin: '0 auto',
         }}>

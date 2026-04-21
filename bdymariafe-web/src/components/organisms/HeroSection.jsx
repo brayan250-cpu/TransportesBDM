@@ -138,11 +138,12 @@ export function HeroSection() {
           <div
             style={{
               display: 'flex',
-              flexWrap: 'wrap',
-              gap: 16,
+              flexDirection: 'column',
+              gap: 12,
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(20px)',
               transition: 'opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s',
+              maxWidth: 400,
             }}
           >
             <a
@@ -151,10 +152,11 @@ export function HeroSection() {
               rel="noopener noreferrer"
               className="btn-whatsapp"
               aria-label="Contactar a BD & Mariafe por WhatsApp"
+              style={{ justifyContent: 'center' }}
             >
               <WAIcon /> {HERO.ctaPrimary}
             </a>
-            <a href="#servicios" className="btn-ghost">
+            <a href="#servicios" className="btn-ghost" style={{ justifyContent: 'center' }}>
               {HERO.ctaSecondary} ↓
             </a>
           </div>
@@ -182,17 +184,25 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute', bottom: 32, left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, zIndex: 2,
-        animation: 'floatY 2s ease-in-out infinite',
-      }} aria-hidden="true">
-        <span style={{ fontSize: '0.7rem', color: '#64748B', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Explorar</span>
-        <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth={2}>
-          <polyline points="6 9 12 15 18 9" />
+      {/* Scroll indicator — subtle chevron only */}
+      <a
+        href="#servicios"
+        style={{
+          position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, zIndex: 2,
+          animation: 'scrollBounce 2.2s ease-in-out infinite',
+          opacity: 0.5,
+          transition: 'opacity 0.3s ease',
+          textDecoration: 'none',
+        }}
+        aria-label="Ir a servicios"
+        onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
+        onMouseLeave={e => e.currentTarget.style.opacity = '0.5'}
+      >
+        <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="#BAE6FD" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="7 10 12 15 17 10" />
         </svg>
-      </div>
+      </a>
 
       <WavyDivider position="bottom" fill="var(--color-bg-elevated)" />
     </section>

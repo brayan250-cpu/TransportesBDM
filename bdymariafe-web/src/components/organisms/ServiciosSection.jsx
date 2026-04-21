@@ -9,8 +9,10 @@ const FloatingGeometryScene = lazy(() => import('../three/scenes/FloatingGeometr
 function ServiceCard({ service, index }) {
   const [ref, visible] = useIntersectionObserver({ threshold: 0.1 })
   const cardRef = useRef()
+  const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window
 
   const handleMouseMove = (e) => {
+    if (isTouchDevice) return
     const card = cardRef.current
     if (!card) return
     const rect = card.getBoundingClientRect()
@@ -175,7 +177,7 @@ export function ServiciosSection() {
         {/* Cards grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
           gap: 24,
         }}>
           {SERVICES.map((service, i) => (

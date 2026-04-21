@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavbarScroll } from '../../hooks/useNavbarScroll'
 import { NAV_LINKS, CONTACT } from '../../data/content'
 
 export function Navbar() {
   const scrolled = useNavbarScroll(80)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.classList.add('nav-open')
+    } else {
+      document.body.classList.remove('nav-open')
+    }
+    return () => document.body.classList.remove('nav-open')
+  }, [mobileOpen])
 
   const waUrl = `https://wa.me/${CONTACT.whatsapp}?text=${CONTACT.whatsappMessage}`
 
@@ -81,10 +91,10 @@ export function Navbar() {
           style={{
             position: 'fixed', inset: 0, zIndex: 9000,
             background: 'rgba(255,255,255,0.97)',
-            backdropFilter: 'blur(12px)',
+            backdropFilter: 'blur(16px)',
             display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'center', gap: '2.5rem',
-            animation: 'fadeIn 0.25s ease both',
+            alignItems: 'center', justifyContent: 'center', gap: '2rem',
+            animation: 'fadeIn 0.3s ease both',
           }}
           role="dialog"
           aria-modal="true"
@@ -98,12 +108,16 @@ export function Navbar() {
             <CloseIcon />
           </button>
 
-          {NAV_LINKS.map(link => (
+          {NAV_LINKS.map((link, i) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              style={{ color: '#0F172A', fontSize: '2rem', fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}
+              style={{
+                color: '#0F172A', fontSize: '1.8rem', fontWeight: 700, textDecoration: 'none', textAlign: 'center',
+                opacity: 0,
+                animation: `fadeInUp 0.4s ease ${0.1 + i * 0.08}s forwards`,
+              }}
             >
               {link.label}
             </a>
@@ -114,7 +128,11 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-whatsapp"
-            style={{ fontSize: '1.1rem', padding: '16px 36px' }}
+            style={{
+              fontSize: '1.05rem', padding: '14px 32px',
+              opacity: 0,
+              animation: `fadeInUp 0.4s ease ${0.1 + NAV_LINKS.length * 0.08}s forwards`,
+            }}
             onClick={() => setMobileOpen(false)}
           >
             <WhatsAppIcon size={22} /> Contáctanos por WhatsApp
