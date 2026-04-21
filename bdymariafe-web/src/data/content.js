@@ -5,7 +5,7 @@ export const SITE = {
   name:    'BD & Mariafe Transportes',
   company: 'BD & Mariafe Transportes',
   tagline: 'Pureza en Movimiento',
-  description: 'Empresa peruana especializada en transporte de leche fresca a granel con cisternas de acero quirúrgico AISI 304/316L.',
+  description: 'Empresa peruana especializada en transporte de leche fresca enfriada a granel con cisternas de acero quirúrgico AISI 304/316L.',
   domain: 'bdymariafe.com.pe',
 }
 
@@ -63,7 +63,7 @@ export const DIFFERENTIATORS = [
     id: 3,
     icon: '🌡️',
     title: 'Cadena de frío ≤ 6°C',
-    description: 'Cisternas aisladas térmicamente con monitoreo continuo de temperatura. Tu leche llega a la planta tan fría como salió de la granja.',
+    description: 'Cisternas aisladas térmicamente con monitoreo continuo de temperatura. Tu leche llega a la planta tan fría como salió del establo.',
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ export const DIFFERENTIATORS = [
 
 export const SERVICIOS = {
   label:   'Nuestros servicios',
-  headline: 'Transporte especializado de leche fresca — de la granja a la planta sin perder un grado',
+  headline: 'Transporte especializado de leche fresca enfriada — del establo a la planta sin perder un grado',
   intro:   'No transportamos cualquier carga. Solo leche. Solo con cisternas certificadas. Solo bajo los más altos estándares biológicos del Perú.',
   cta:     'Solicitar cotización por WhatsApp',
   ctaMicro:'Respuesta en minutos. Cobertura confirmada al instante.',
@@ -100,7 +100,7 @@ export const SERVICES = [
     color: '#2563EB',
     category: 'Servicio principal',
     title: 'Transporte a Granel',
-    description: 'Traslado de leche cruda desde centros de acopio o granjas hasta plantas procesadoras como Gloria, Laive y Nestlé. Cisternas AISI 304/316L de alta capacidad.',
+    description: 'Traslado de leche fresca enfriada desde establos o centros de acopio hasta plantas procesadoras como Gloria, Laive y Nestlé. Cisternas AISI 304/316L de alta capacidad.',
     features: ['Cisternas selladas con precintos de seguridad', 'Temperatura monitorizada ≤ 6°C', 'Documentación sanitaria incluida', 'Registro de trazabilidad por lote'],
     badge: 'Servicio principal',
     cta: 'Consultar disponibilidad',
@@ -111,8 +111,8 @@ export const SERVICES = [
     color: '#25D366',
     category: 'Comodidad',
     title: 'Recojo Directo',
-    description: 'Llegamos hasta tu granja o centro de acopio. El productor no tiene que movilizar su leche — la cisterna va al origen. Coordinación directa por WhatsApp.',
-    features: ['Llegamos a tu granja o centro de acopio', 'Coordinación por WhatsApp', 'Verificación de parámetros antes de cargar', 'Sin demoras innecesarias'],
+    description: 'Llegamos hasta tu establo o centro de acopio. El productor no tiene que movilizar su leche — la cisterna va al origen. Coordinación directa por WhatsApp.',
+    features: ['Llegamos a tu establo o centro de acopio', 'Coordinación por WhatsApp', 'Verificación de parámetros antes de cargar', 'Sin demoras innecesarias'],
     badge: null,
     cta: 'Coordinar recojo',
   },
@@ -150,7 +150,7 @@ export const PROCESO = {
 
 export const PROCESS_STEPS = [
   { number: '01', title: 'Nos coordinas por WhatsApp', description: 'Escríbenos con tu zona, volumen estimado y frecuencia. Confirmamos disponibilidad y acordamos la ruta en minutos.' },
-  { number: '02', title: 'Verificamos los parámetros', description: 'Antes de cargar, nuestro operador verifica los parámetros de la leche (temperatura, acidez inicial). Sin leche fuera de norma, sin problemas en planta.' },
+  { number: '02', title: 'Verificamos los parámetros', description: 'Antes de cargar, nuestro operador verifica los parámetros de la leche enfriada (temperatura, acidez inicial). Sin leche fuera de norma, sin problemas en planta.' },
   { number: '03', title: 'Cargamos y sellamos', description: 'La cisterna se llena y se sella con precintos de seguridad numerados. Iniciamos el registro de trazabilidad del lote.' },
   { number: '04', title: 'Transportamos con monitoreo', description: 'La leche viaja a ≤ 6°C, monitoreo continuo durante todo el trayecto. Si hay alguna incidencia, te notificamos de inmediato.' },
   { number: '05', title: 'Entregamos en planta', description: 'Llegamos dentro de la ventana horaria de recepción. Entregamos la leche junto a toda la documentación sanitaria del lote.' },
@@ -216,8 +216,8 @@ export const CONTACTO = {
 }
 
 export const FOOTER = {
-  tagline:           'Pureza en Movimiento — Transporte certificado de leche fresca en el Perú',
-  brand_description: 'Empresa peruana especializada en transporte de leche fresca a granel. Cisternas AISI 304/316L, limpieza CIP certificada y trazabilidad completa en cada lote.',
+  tagline:           'Pureza en Movimiento — Transporte de leche enfriada certificado en el Perú',
+  brand_description: 'Empresa peruana especializada en transporte de leche fresca enfriada a granel. Cisternas AISI 304/316L, limpieza CIP certificada y trazabilidad completa en cada lote.',
   copyright:         '© 2026 BD & Mariafe Transportes. Todos los derechos reservados.',
   ruc_text:          'RUC: 10801671093 — Lima, Perú',
   services_links: [
