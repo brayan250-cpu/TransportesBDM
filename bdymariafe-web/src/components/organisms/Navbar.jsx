@@ -22,7 +22,7 @@ export function Navbar() {
           {/* Logo */}
           <a href="#hero" aria-label="Transportes BDM — Inicio" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
             <img
-              src="/logo-bdm.png"
+              src={`${import.meta.env.BASE_URL}logo-bdm.png`}
               alt="Transportes BDM"
               style={{
                 height: 'clamp(48px, 7vw, 68px)',
