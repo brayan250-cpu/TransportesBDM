@@ -150,9 +150,6 @@ export function Footer() {
           <p style={{ color: '#64748B', fontSize: '0.8rem', margin: 0 }}>
             © {year} {SITE.name}. Todos los derechos reservados.
           </p>
-          <p style={{ color: '#64748B', fontSize: '0.8rem', margin: 0 }}>
-            {FOOTER.ruc_text}
-          </p>
         </div>
       </div>
     </footer>
